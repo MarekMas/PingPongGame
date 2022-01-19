@@ -16,9 +16,9 @@ __published:	// IDE-managed Components
         TPanel *Panel1;
         TShape *Brick1;
         TShape *Brick2;
-        TShape *Shape5;
-        TShape *Shape7;
-        TShape *Shape10;
+        TShape *Brick3;
+        TShape *Brick4;
+        TShape *Brick5;
         TShape *P1Top;
         TShape *P1Center;
         TShape *P1Bottom;
@@ -34,11 +34,12 @@ __published:	// IDE-managed Components
         TTimer *TimerP1Up;
         TTimer *TimerP1Down;
         TTimer *TimerBlinding;
-        TShape *Shape2;
-        TShape *Shape4;
-        TShape *Shape6;
-        TShape *Shape8;
-        TShape *Shape9;
+        TShape *Brick6;
+        TShape *Brick7;
+        TShape *Brick8;
+        TShape *Brick9;
+        TShape *Brick10;
+
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);

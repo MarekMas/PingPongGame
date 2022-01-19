@@ -11,6 +11,8 @@ TForm1 *Form1;
 int x = 8;
 int y = 8;
 int wait = 0;
+int blindingCount = 1;
+TShape *p = NULL;
 //---------------------------------------------------------------------------
 bool collision(TShape *obj)
 {
@@ -57,17 +59,17 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
      (Ball->Top + Ball->Height/2 <= P1->Top + P1->Height))
    {
     x = -x;
-    if(Ball->Height/2 <= P1->Top + P1->Height/3)
+    if(Ball->Top + Ball->Height/2 <= P1->Top + P1->Height/3)
     {
      P1Top->Visible = false;
-
     }
-    if((Ball->Height/2 > P1->Top + P1->Height/3) && Ball->Height/2 < P1->Top + P1->Height - 40)
+    if((Ball->Top + Ball->Height/2 > P1->Top + P1->Height/3) &&
+       (Ball->Top + Ball->Height/2 < P1->Top + P1->Height * 2 / 3))
     {
      P1Center->Visible = false;
     }
 
-    if((Ball->Height/2) >= (P1->Top + P1->Height - 40) )
+    if((Ball->Top + Ball->Height/2) >= (P1->Top + P1->Height * 2 / 3) )
     {
      P1Bottom->Visible = false;
     }
@@ -86,6 +88,20 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
      (Ball->Top + Ball->Height/2 < P2->Top + P2->Height))
    {
     x = -x;
+    if(Ball->Top + Ball->Height/2 <= P2->Top + P2->Height/3)
+    {
+     P2Top->Visible = false;
+    }
+    if((Ball->Top + Ball->Height/2 > P2->Top + P2->Height/3) &&
+       (Ball->Top + Ball->Height/2 < P2->Top + P2->Height * 2 / 3))
+    {
+     P2Center->Visible = false;
+    }
+
+    if((Ball->Top + Ball->Height/2) >= (P2->Top + P2->Height * 2 / 3) )
+    {
+     P2Bottom->Visible = false;
+    }
    }
    else
    {
@@ -93,7 +109,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
    }
    wait = 50;
  }
-
+ 
 }
 
 //---------------------------------------------------------------------------
@@ -192,5 +208,40 @@ void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+
+void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
+{
+ if(P1Top->Visible == false && P1Center->Visible == false && P1Bottom->Visible == false)
+ {
+
+    if (blindingCount%2 == 0) P1->Brush->Color = clYellow;
+    else                      P1->Brush->Color = clRed;
+    blindingCount ++;
+    if(blindingCount == 13)
+    {
+     blindingCount = 1;
+     P1Top->Visible = true;
+     P1Center->Visible = true;
+     P1Bottom->Visible = true;
+    }
+ }
+
+ if(P2Top->Visible == false && P2Center->Visible == false && P2Bottom->Visible == false)
+ {
+
+    if (blindingCount%2 == 0) P2->Brush->Color = clYellow;
+    else                      P2->Brush->Color = clRed;
+    blindingCount ++;
+    if(blindingCount == 13)
+    {
+     blindingCount = 1;
+     P2Top->Visible = true;
+     P2Center->Visible = true;
+     P2Bottom->Visible = true;
+    }
+ }
+}
+//---------------------------------------------------------------------------
 
 

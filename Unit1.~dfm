@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = 200
-  Top = 108
-  Width = 1200
+  Left = 247
+  Top = 72
+  Width = 1199
   Height = 700
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'PingPongByMarekM'
@@ -24,6 +24,7 @@ object Form1: TForm1
     Top = 280
     Width = 20
     Height = 120
+    Brush.Color = clYellow
     Pen.Width = 2
   end
   object P1: TShape
@@ -31,184 +32,50 @@ object Form1: TForm1
     Top = 280
     Width = 20
     Height = 120
+    Brush.Color = clYellow
     Pen.Width = 2
   end
-  object Shape1: TShape
+  object Brick1: TShape
     Left = 16
-    Top = 32
+    Top = 40
     Width = 25
-    Height = 50
+    Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape2: TShape
-    Left = 16
-    Top = 96
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape3: TShape
+  object Brick2: TShape
     Left = 16
     Top = 160
     Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape4: TShape
-    Left = 16
-    Top = 224
-    Width = 25
-    Height = 50
+    Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
   end
   object Shape5: TShape
     Left = 16
-    Top = 288
+    Top = 280
     Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape6: TShape
-    Left = 16
-    Top = 352
-    Width = 25
-    Height = 50
+    Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
   end
   object Shape7: TShape
     Left = 16
-    Top = 416
+    Top = 408
     Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape8: TShape
-    Left = 16
-    Top = 480
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape9: TShape
-    Left = 16
-    Top = 544
-    Width = 25
-    Height = 50
+    Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
   end
   object Shape10: TShape
     Left = 16
-    Top = 608
+    Top = 536
     Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape11: TShape
-    Left = 1144
-    Top = 32
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape12: TShape
-    Left = 1144
-    Top = 96
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape13: TShape
-    Left = 1144
-    Top = 160
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape14: TShape
-    Left = 1144
-    Top = 224
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape15: TShape
-    Left = 1144
-    Top = 288
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape16: TShape
-    Left = 1144
-    Top = 352
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape17: TShape
-    Left = 1144
-    Top = 416
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape18: TShape
-    Left = 1144
-    Top = 480
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape19: TShape
-    Left = 1144
-    Top = 544
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
-    Pen.Width = 2
-    Shape = stRoundRect
-  end
-  object Shape20: TShape
-    Left = 1144
-    Top = 603
-    Width = 25
-    Height = 50
+    Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
@@ -270,6 +137,51 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stCircle
   end
+  object Shape2: TShape
+    Left = 1136
+    Top = 48
+    Width = 25
+    Height = 100
+    Brush.Color = clRed
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Shape4: TShape
+    Left = 1136
+    Top = 168
+    Width = 25
+    Height = 100
+    Brush.Color = clRed
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Shape6: TShape
+    Left = 1136
+    Top = 288
+    Width = 25
+    Height = 100
+    Brush.Color = clRed
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Shape8: TShape
+    Left = 1136
+    Top = 416
+    Width = 25
+    Height = 100
+    Brush.Color = clRed
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
+  object Shape9: TShape
+    Left = 1136
+    Top = 544
+    Width = 25
+    Height = 100
+    Brush.Color = clRed
+    Pen.Width = 2
+    Shape = stRoundRect
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -303,13 +215,19 @@ object Form1: TForm1
     Interval = 20
     OnTimer = TimerP1UpTimer
     Left = 128
-    Top = 72
+    Top = 56
   end
   object TimerP1Down: TTimer
     Enabled = False
     Interval = 20
     OnTimer = TimerP1DownTimer
     Left = 128
-    Top = 112
+    Top = 96
+  end
+  object TimerBlinding: TTimer
+    Interval = 100
+    OnTimer = TimerBlindingTimer
+    Left = 496
+    Top = 88
   end
 end

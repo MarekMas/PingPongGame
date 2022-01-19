@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 247
-  Top = 72
+  Left = -10
+  Top = 27
   Width = 1199
   Height = 700
   BorderIcons = [biSystemMenu, biMinimize]
@@ -53,7 +53,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape5: TShape
+  object Brick3: TShape
     Left = 16
     Top = 280
     Width = 25
@@ -62,7 +62,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape7: TShape
+  object Brick4: TShape
     Left = 16
     Top = 408
     Width = 25
@@ -71,7 +71,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape10: TShape
+  object Brick5: TShape
     Left = 16
     Top = 536
     Width = 25
@@ -137,7 +137,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stCircle
   end
-  object Shape2: TShape
+  object Brick6: TShape
     Left = 1136
     Top = 48
     Width = 25
@@ -146,7 +146,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape4: TShape
+  object Brick7: TShape
     Left = 1136
     Top = 168
     Width = 25
@@ -155,7 +155,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape6: TShape
+  object Brick8: TShape
     Left = 1136
     Top = 288
     Width = 25
@@ -164,7 +164,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape8: TShape
+  object Brick9: TShape
     Left = 1136
     Top = 416
     Width = 25
@@ -173,7 +173,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape9: TShape
+  object Brick10: TShape
     Left = 1136
     Top = 544
     Width = 25

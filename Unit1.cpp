@@ -2,7 +2,6 @@
 
 #include <vcl.h>
 #pragma hdrstop
-
 #include "Unit1.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -12,7 +11,6 @@ int x = 8;
 int y = 8;
 int wait = 0;
 int blindingCount = 1;
-TShape *p = NULL;
 //---------------------------------------------------------------------------
 bool collision(TShape *obj)
 {
@@ -52,7 +50,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
  {
   y = -y;
  }
- // kolizja z paletk¹
+ // kolizja z paletkami
  if(collision(P1) && wait == 0)
  {
   if((Ball->Top + Ball->Height/2 >= P1->Top) &&
@@ -109,6 +107,98 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
    }
    wait = 50;
  }
+ // kolizja z ceglami
+
+ if(collision(Brick1))
+ {
+  if(Brick1->Visible)
+  {
+   x = -x;
+   Brick1->Visible = false;
+  }
+ }
+
+ if(collision(Brick2))
+ {
+  if(Brick2->Visible)
+  {
+   x = -x;
+   Brick2->Visible = false;
+  }
+ }
+
+ if(collision(Brick3))
+ {
+  if(Brick3->Visible)
+  {
+   x = -x;
+   Brick3->Visible = false;
+  }
+ }
+
+ if(collision(Brick4))
+ {
+  if(Brick4->Visible)
+  {
+   x = -x;
+   Brick4->Visible = false;
+  }
+ }
+
+ if(collision(Brick5))
+ {
+  if(Brick5->Visible)
+  {
+   x = -x;
+   Brick5->Visible = false;
+  }
+ }
+
+ if(collision(Brick6))
+ {
+  if(Brick6->Visible)
+  {
+   x = -x;
+   Brick6->Visible = false;
+  }
+ }
+
+ if(collision(Brick7))
+ {
+  if(Brick7->Visible)
+  {
+   x = -x;
+   Brick7->Visible = false;
+  }
+ }
+
+ if(collision(Brick8))
+ {
+  if(Brick8->Visible)
+  {
+   x = -x;
+   Brick8->Visible = false;
+  }
+ }
+
+ if(collision(Brick9))
+ {
+  if(Brick9->Visible)
+  {
+   x = -x;
+   Brick9->Visible = false;
+  }
+ }
+
+ if(collision(Brick10))
+ {
+  if(Brick10->Visible)
+  {
+   x = -x;
+   Brick10->Visible = false;
+  }
+ }
+
  
 }
 
@@ -162,7 +252,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
 
 void __fastcall TForm1::TimerP1UpTimer(TObject *Sender)
 {
- if(P1->Top + P1->Height >= Panel1->Top + Panel1->Height + 40)
+ if(P1->Top >= Panel1->Top + Panel1->Height)
  {
   P1->Top -= 10;
   P1Top->Top = P1->Top;
@@ -174,7 +264,7 @@ void __fastcall TForm1::TimerP1UpTimer(TObject *Sender)
 
 void __fastcall TForm1::TimerP1DownTimer(TObject *Sender)
 {
- if(P1->Top <= Form1->Height -80)
+ if(P1->Top + P1->Height <= Form1->Height -50)
  {
   P1->Top += 10;
   P1Top->Top = P1->Top;
@@ -186,7 +276,7 @@ void __fastcall TForm1::TimerP1DownTimer(TObject *Sender)
 
 void __fastcall TForm1::TimerP2UpTimer(TObject *Sender)
 {
- if(P2->Top + P2->Height >= Panel1->Top + Panel1->Height + 40)
+ if(P2->Top >= Panel1->Top + Panel1->Height)
  {
   P2->Top -= 10;
   P2Top->Top = P2->Top;
@@ -198,7 +288,7 @@ void __fastcall TForm1::TimerP2UpTimer(TObject *Sender)
 
 void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
 {
- if(P2->Top <= Form1->Height -80)
+ if(P2->Top + P2->Height <= Form1->Height -50)
  {
   P2->Top += 10;
   P2Top->Top = P2->Top;
