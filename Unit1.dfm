@@ -197,7 +197,7 @@ object Form1: TForm1
     Pen.Width = 2
     Shape = stRoundRect
   end
-  object Shape21: TShape
+  object P1Top: TShape
     Left = 125
     Top = 280
     Width = 20
@@ -205,7 +205,7 @@ object Form1: TForm1
     Brush.Color = clGreen
     Pen.Width = 2
   end
-  object Shape22: TShape
+  object P1Center: TShape
     Left = 125
     Top = 320
     Width = 20
@@ -213,7 +213,7 @@ object Form1: TForm1
     Brush.Color = clGreen
     Pen.Width = 2
   end
-  object Shape23: TShape
+  object P1Bottom: TShape
     Left = 125
     Top = 360
     Width = 20
@@ -221,7 +221,7 @@ object Form1: TForm1
     Brush.Color = clGreen
     Pen.Width = 2
   end
-  object Shape24: TShape
+  object P2Top: TShape
     Left = 1048
     Top = 280
     Width = 20
@@ -229,7 +229,7 @@ object Form1: TForm1
     Brush.Color = clGreen
     Pen.Width = 2
   end
-  object Shape25: TShape
+  object P2Center: TShape
     Left = 1048
     Top = 320
     Width = 20
@@ -237,7 +237,7 @@ object Form1: TForm1
     Brush.Color = clGreen
     Pen.Width = 2
   end
-  object Shape26: TShape
+  object P2Bottom: TShape
     Left = 1048
     Top = 360
     Width = 20
@@ -253,6 +253,22 @@ object Form1: TForm1
     Brush.Color = clYellow
     Pen.Width = 2
     Shape = stCircle
+  end
+  object Shape21: TShape
+    Left = 125
+    Top = 280
+    Width = 20
+    Height = 120
+    Pen.Width = 2
+    Visible = False
+  end
+  object Shape22: TShape
+    Left = 1048
+    Top = 280
+    Width = 20
+    Height = 120
+    Pen.Width = 2
+    Visible = False
   end
   object Panel1: TPanel
     Left = 0

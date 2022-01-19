@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 80
-  Top = 14
+  Left = 251
+  Top = 31
   Width = 1200
   Height = 700
   BorderIcons = [biSystemMenu, biMinimize]
@@ -198,13 +198,61 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object Shape21: TShape
-    Left = 128
-    Top = 216
-    Width = 25
-    Height = 50
-    Brush.Color = clRed
+    Left = 125
+    Top = 280
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
     Pen.Width = 2
-    Shape = stRoundRect
+  end
+  object Shape22: TShape
+    Left = 125
+    Top = 320
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
+    Pen.Width = 2
+  end
+  object Shape23: TShape
+    Left = 125
+    Top = 360
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
+    Pen.Width = 2
+  end
+  object Shape24: TShape
+    Left = 1048
+    Top = 280
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
+    Pen.Width = 2
+  end
+  object Shape25: TShape
+    Left = 1048
+    Top = 320
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
+    Pen.Width = 2
+  end
+  object Shape26: TShape
+    Left = 1048
+    Top = 360
+    Width = 20
+    Height = 40
+    Brush.Color = clGreen
+    Pen.Width = 2
+  end
+  object Ball: TShape
+    Left = 144
+    Top = 328
+    Width = 25
+    Height = 25
+    Brush.Color = clYellow
+    Pen.Width = 2
+    Shape = stCircle
   end
   object Panel1: TPanel
     Left = 0
@@ -213,5 +261,11 @@ object Form1: TForm1
     Height = 33
     Color = clBackground
     TabOrder = 0
+  end
+  object TimerBall: TTimer
+    Interval = 30
+    OnTimer = TimerBallTimer
+    Left = 376
+    Top = 48
   end
 end
