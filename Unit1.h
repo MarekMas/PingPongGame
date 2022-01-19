@@ -42,9 +42,21 @@ __published:	// IDE-managed Components
         TShape *P2Bottom;
         TShape *Ball;
         TTimer *TimerBall;
-        TShape *Shape21;
-        TShape *Shape22;
+        TShape *P1;
+        TShape *P2;
+        TTimer *TimerP2Up;
+        TTimer *TimerP2Down;
+        TTimer *TimerP1Up;
+        TTimer *TimerP1Down;
         void __fastcall TimerBallTimer(TObject *Sender);
+        void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
+          TShiftState Shift);
+        void __fastcall FormKeyUp(TObject *Sender, WORD &Key,
+          TShiftState Shift);
+        void __fastcall TimerP1UpTimer(TObject *Sender);
+        void __fastcall TimerP1DownTimer(TObject *Sender);
+        void __fastcall TimerP2UpTimer(TObject *Sender);
+        void __fastcall TimerP2DownTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

@@ -10,6 +10,19 @@
 TForm1 *Form1;
 int x = 8;
 int y = 8;
+
+bool collision(TShape *obj)
+{
+ if((Form1->Ball->Left <= obj->Left + obj->Width) &&
+    (Form1->Ball->Left + Form1->Ball->Width >= obj->Left) &&
+    (Form1->Ball->Top <= obj->Top + obj->Height) &&
+    (Form1->Ball->Top + Form1->Ball->Height >= obj->Top))
+ {
+  return true;
+ }
+ else
+  return false;
+}
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -21,8 +34,28 @@ __fastcall TForm1::TForm1(TComponent* Owner)
 
 void __fastcall TForm1::TimerBallTimer(TObject *Sender)
 {
-Ball->Left += x;
-        Ball->Top += y;
+ Ball->Left += x;
+ Ball->Top += y;
+ //kolizje ze scianami
+ if(Ball->Top <= Panel1->Top + Panel1->Height)
+ {
+  y = -y;
+ }
+ if(Ball->Top + Ball->Height >= Form1->Height - 50)
+ {
+  y = -y;
+ }
+ // kolizja z paletk¹
+ if(collision(P1))
+ {
+   x = -x;
+   y = -y;
+ }
+ if(collision(P2))
+ {
+   x = -x;
+   y = -y;
+ }
 
 }
 

@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 251
-  Top = 31
+  Left = 197
+  Top = 137
   Width = 1200
   Height = 700
   BorderIcons = [biSystemMenu, biMinimize]
@@ -15,6 +15,8 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  OnKeyDown = FormKeyDown
+  OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
   object Shape1: TShape
@@ -246,15 +248,15 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object Ball: TShape
-    Left = 144
-    Top = 328
+    Left = 816
+    Top = 192
     Width = 25
     Height = 25
     Brush.Color = clYellow
     Pen.Width = 2
     Shape = stCircle
   end
-  object Shape21: TShape
+  object P1: TShape
     Left = 125
     Top = 280
     Width = 20
@@ -262,7 +264,7 @@ object Form1: TForm1
     Pen.Width = 2
     Visible = False
   end
-  object Shape22: TShape
+  object P2: TShape
     Left = 1048
     Top = 280
     Width = 20
@@ -281,7 +283,31 @@ object Form1: TForm1
   object TimerBall: TTimer
     Interval = 30
     OnTimer = TimerBallTimer
-    Left = 376
+    Left = 496
     Top = 48
+  end
+  object TimerP2Up: TTimer
+    Interval = 20
+    OnTimer = TimerP2UpTimer
+    Left = 1040
+    Top = 56
+  end
+  object TimerP2Down: TTimer
+    Interval = 20
+    OnTimer = TimerP2DownTimer
+    Left = 1040
+    Top = 96
+  end
+  object TimerP1Up: TTimer
+    Interval = 20
+    OnTimer = TimerP1UpTimer
+    Left = 128
+    Top = 72
+  end
+  object TimerP1Down: TTimer
+    Interval = 20
+    OnTimer = TimerP1DownTimer
+    Left = 128
+    Top = 112
   end
 end
