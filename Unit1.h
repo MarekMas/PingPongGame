@@ -35,6 +35,14 @@ __published:	// IDE-managed Components
         TShape *Shape19;
         TShape *Shape20;
         TShape *Shape21;
+        TShape *Shape22;
+        TShape *Shape23;
+        TShape *Shape24;
+        TShape *Shape25;
+        TShape *Shape26;
+        TShape *Ball;
+        TTimer *TimerBall;
+        void __fastcall TimerBallTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
