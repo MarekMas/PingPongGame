@@ -14,26 +14,11 @@ class TForm1 : public TForm
 {
 __published:	// IDE-managed Components
         TPanel *Panel1;
-        TShape *Shape1;
-        TShape *Shape2;
-        TShape *Shape3;
-        TShape *Shape4;
+        TShape *Brick1;
+        TShape *Brick2;
         TShape *Shape5;
-        TShape *Shape6;
         TShape *Shape7;
-        TShape *Shape8;
-        TShape *Shape9;
         TShape *Shape10;
-        TShape *Shape11;
-        TShape *Shape12;
-        TShape *Shape13;
-        TShape *Shape14;
-        TShape *Shape15;
-        TShape *Shape16;
-        TShape *Shape17;
-        TShape *Shape18;
-        TShape *Shape19;
-        TShape *Shape20;
         TShape *P1Top;
         TShape *P1Center;
         TShape *P1Bottom;
@@ -48,6 +33,12 @@ __published:	// IDE-managed Components
         TTimer *TimerP2Down;
         TTimer *TimerP1Up;
         TTimer *TimerP1Down;
+        TTimer *TimerBlinding;
+        TShape *Shape2;
+        TShape *Shape4;
+        TShape *Shape6;
+        TShape *Shape8;
+        TShape *Shape9;
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
           TShiftState Shift);
@@ -57,6 +48,7 @@ __published:	// IDE-managed Components
         void __fastcall TimerP1DownTimer(TObject *Sender);
         void __fastcall TimerP2UpTimer(TObject *Sender);
         void __fastcall TimerP2DownTimer(TObject *Sender);
+        void __fastcall TimerBlindingTimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
