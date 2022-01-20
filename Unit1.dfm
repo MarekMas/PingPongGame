@@ -1,7 +1,7 @@
 object Form1: TForm1
-  Left = -10
-  Top = 27
-  Width = 1199
+  Left = 139
+  Top = 44
+  Width = 1201
   Height = 700
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'PingPongByMarekM'
@@ -20,7 +20,7 @@ object Form1: TForm1
   PixelsPerInch = 96
   TextHeight = 13
   object P2: TShape
-    Left = 1048
+    Left = 1044
     Top = 280
     Width = 20
     Height = 120
@@ -28,7 +28,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P1: TShape
-    Left = 125
+    Left = 121
     Top = 280
     Width = 20
     Height = 120
@@ -81,7 +81,7 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object P1Top: TShape
-    Left = 125
+    Left = 121
     Top = 280
     Width = 20
     Height = 40
@@ -89,7 +89,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P1Center: TShape
-    Left = 125
+    Left = 121
     Top = 320
     Width = 20
     Height = 40
@@ -97,7 +97,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P1Bottom: TShape
-    Left = 125
+    Left = 121
     Top = 360
     Width = 20
     Height = 40
@@ -105,7 +105,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P2Top: TShape
-    Left = 1048
+    Left = 1044
     Top = 280
     Width = 20
     Height = 40
@@ -113,7 +113,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P2Center: TShape
-    Left = 1048
+    Left = 1044
     Top = 320
     Width = 20
     Height = 40
@@ -121,7 +121,7 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object P2Bottom: TShape
-    Left = 1048
+    Left = 1044
     Top = 360
     Width = 20
     Height = 40
@@ -138,7 +138,7 @@ object Form1: TForm1
     Shape = stCircle
   end
   object Brick6: TShape
-    Left = 1136
+    Left = 1144
     Top = 48
     Width = 25
     Height = 100
@@ -147,7 +147,7 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object Brick7: TShape
-    Left = 1136
+    Left = 1144
     Top = 168
     Width = 25
     Height = 100
@@ -156,7 +156,7 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object Brick8: TShape
-    Left = 1136
+    Left = 1144
     Top = 288
     Width = 25
     Height = 100
@@ -165,7 +165,7 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object Brick9: TShape
-    Left = 1136
+    Left = 1144
     Top = 416
     Width = 25
     Height = 100
@@ -174,7 +174,7 @@ object Form1: TForm1
     Shape = stRoundRect
   end
   object Brick10: TShape
-    Left = 1136
+    Left = 1144
     Top = 544
     Width = 25
     Height = 100

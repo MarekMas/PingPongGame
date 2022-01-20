@@ -16,8 +16,8 @@ bool collision(TShape *obj)
 {
  if((Form1->Ball->Left <= obj->Left + obj->Width) &&
     (Form1->Ball->Left + Form1->Ball->Width >= obj->Left) &&
-    (Form1->Ball->Top <= obj->Top + obj->Height) &&
-    (Form1->Ball->Top + Form1->Ball->Height >= obj->Top))
+    (Form1->Ball->Top + Form1->Ball->Height/2 <= obj->Top + obj->Height) &&
+    (Form1->Ball->Top + Form1->Ball->Height/2 >= obj->Top))
  {
   return true;
  }
@@ -53,9 +53,6 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
  // kolizja z paletkami
  if(collision(P1) && wait == 0)
  {
-  if((Ball->Top + Ball->Height/2 >= P1->Top) &&
-     (Ball->Top + Ball->Height/2 <= P1->Top + P1->Height))
-   {
     x = -x;
     if(Ball->Top + Ball->Height/2 <= P1->Top + P1->Height/3)
     {
@@ -71,20 +68,10 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
     {
      P1Bottom->Visible = false;
     }
-
-   }
-   else
-   {
-    y= -y;
-   }
-   wait = 50;
-
+   wait = 25;
  }
  if(collision(P2) && wait == 0)
  {
-  if((Ball->Top + Ball->Height/2 > P2->Top) &&
-     (Ball->Top + Ball->Height/2 < P2->Top + P2->Height))
-   {
     x = -x;
     if(Ball->Top + Ball->Height/2 <= P2->Top + P2->Height/3)
     {
@@ -100,12 +87,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
     {
      P2Bottom->Visible = false;
     }
-   }
-   else
-   {
-    y= -y;
-   }
-   wait = 50;
+   wait = 25;
  }
  // kolizja z ceglami
 
