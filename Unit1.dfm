@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 18
-  Top = 30
+  Left = 71
+  Top = 46
   Width = 1191
   Height = 680
   BorderIcons = [biSystemMenu, biMinimize]
@@ -19,16 +19,16 @@ object Form1: TForm1
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
   TextHeight = 13
-  object P2: TShape
-    Left = 1044
+  object P1: TShape
+    Left = 121
     Top = 280
     Width = 20
     Height = 120
     Brush.Color = clYellow
     Pen.Width = 2
   end
-  object P1: TShape
-    Left = 121
+  object P2: TShape
+    Left = 1044
     Top = 280
     Width = 20
     Height = 120
@@ -40,7 +40,7 @@ object Form1: TForm1
     Top = 40
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -50,7 +50,7 @@ object Form1: TForm1
     Top = 160
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -60,7 +60,7 @@ object Form1: TForm1
     Top = 280
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -70,7 +70,7 @@ object Form1: TForm1
     Top = 408
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -80,7 +80,7 @@ object Form1: TForm1
     Top = 536
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -147,7 +147,7 @@ object Form1: TForm1
     Top = 40
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -157,7 +157,7 @@ object Form1: TForm1
     Top = 160
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -167,7 +167,7 @@ object Form1: TForm1
     Top = 280
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -177,7 +177,7 @@ object Form1: TForm1
     Top = 408
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -187,7 +187,7 @@ object Form1: TForm1
     Top = 536
     Width = 25
     Height = 100
-    Brush.Color = clRed
+    Brush.Color = clGreen
     Pen.Width = 2
     Shape = stRoundRect
     Visible = False
@@ -199,24 +199,6 @@ object Form1: TForm1
     Height = 33
     Color = clBackground
     TabOrder = 0
-  end
-  object ProgressBar1: TProgressBar
-    Left = 64
-    Top = 336
-    Width = 49
-    Height = 17
-    Min = 0
-    Max = 100
-    TabOrder = 1
-  end
-  object ProgressBar2: TProgressBar
-    Left = 1072
-    Top = 336
-    Width = 49
-    Height = 17
-    Min = 0
-    Max = 100
-    TabOrder = 2
   end
   object TimerBall: TTimer
     Enabled = False

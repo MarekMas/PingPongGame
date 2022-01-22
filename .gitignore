@@ -2,6 +2,7 @@
 *.d
 *.~*
 *.exe
+*.tds
 
 # Compiled Object files
 *.slo

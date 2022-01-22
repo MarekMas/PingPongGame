@@ -40,8 +40,6 @@ __published:	// IDE-managed Components
         TShape *Brick8;
         TShape *Brick9;
         TShape *Brick10;
-        TProgressBar *ProgressBar1;
-        TProgressBar *ProgressBar2;
 
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
