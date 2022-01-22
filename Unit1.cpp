@@ -1,17 +1,35 @@
 //---------------------------------------------------------------------------
 
 #include <vcl.h>
+#include <math.h>
 #pragma hdrstop
 #include "Unit1.h"
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
 #pragma resource "*.dfm"
 TForm1 *Form1;
-int x = 8;
-int y = 8;
+int x = 0;
+int y = 0;
+int const basicSpeed = 20;
+int const turboSpeed = 40;
+int const angle = 4;
+int speed = basicSpeed;
+int pickup = 0;
 int wait = 0;
 int blindingCount = 1;
+int pointsP1 = 0, pointsP2 = 0;
+bool serverP1 = true, serverP2 = false;
 //---------------------------------------------------------------------------
+void changeX()
+{
+ double outcome, speedD = speed , yD = y;
+ outcome = sqrt(pow(speedD,2.0) - pow(yD,2.0));
+ if(x > 0)                      x = - outcome;
+ else                           x = outcome;
+ if (serverP1)                  x = outcome;
+ if (serverP2)                  x = -outcome;
+}
+
 bool collision(TShape *obj)
 {
  if((Form1->Ball->Left <= obj->Left + obj->Width) &&
@@ -19,13 +37,35 @@ bool collision(TShape *obj)
     (Form1->Ball->Top + Form1->Ball->Height/2 <= obj->Top + obj->Height) &&
     (Form1->Ball->Top + Form1->Ball->Height/2 >= obj->Top))
  {
+  speed = basicSpeed;
+
   return true;
+
+
  }
  else
   return false;
 }
 //---------------------------------------------------------------------------
-
+void showNewBrick(int paddleNumber)
+{
+ if(paddleNumber == 1)
+ {
+  if(Form1->Brick1->Visible == false) Form1->Brick1->Visible = true;
+  else if(Form1->Brick5->Visible == false) Form1->Brick5->Visible = true;
+  else if(Form1->Brick2->Visible == false) Form1->Brick2->Visible = true;
+  else if(Form1->Brick4->Visible == false) Form1->Brick4->Visible = true;
+  else if(Form1->Brick3->Visible == false) Form1->Brick3->Visible = true;
+ }
+if(paddleNumber == 2)
+ {
+  if(Form1->Brick6->Visible == false) Form1->Brick6->Visible = true;
+  else if(Form1->Brick10->Visible == false) Form1->Brick10->Visible = true;
+  else if(Form1->Brick7->Visible == false) Form1->Brick7->Visible = true;
+  else if(Form1->Brick9->Visible == false) Form1->Brick9->Visible = true;
+  else if(Form1->Brick8->Visible == false) Form1->Brick8->Visible = true;
+ }
+}
 //---------------------------------------------------------------------------
 __fastcall TForm1::TForm1(TComponent* Owner)
         : TForm(Owner)
@@ -42,18 +82,19 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
  Ball->Left += x;
  Ball->Top += y;
  //kolizje ze scianami
- if(Ball->Top <= Panel1->Top + Panel1->Height)
+ if((Ball->Top <= Panel1->Top + Panel1->Height)||
+    (Ball->Top + Ball->Height >= Form1->Height - 50))
  {
   y = -y;
  }
- if(Ball->Top + Ball->Height >= Form1->Height - 50)
- {
-  y = -y;
- }
- // kolizja z paletkami
+ // kolizja z paletk¹ P1
  if(collision(P1) && wait == 0)
  {
-    x = -x;
+    if(TimerP1Up->Enabled)             y -= angle;
+    else if(TimerP1Down->Enabled)      y += angle;
+    else if(y > 0)                     y = angle;
+    else if(y < 0)                     y = -angle;
+
     if(Ball->Top + Ball->Height/2 <= P1->Top + P1->Height/3)
     {
      P1Top->Visible = false;
@@ -63,16 +104,25 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
     {
      P1Center->Visible = false;
     }
-
     if((Ball->Top + Ball->Height/2) >= (P1->Top + P1->Height * 2 / 3) )
     {
      P1Bottom->Visible = false;
     }
+
    wait = 25;
+
+   if(y>(3*angle)) y -= angle;
+   if(y<(3*-angle)) y += angle;
+   changeX();
  }
+  // kolizja z paletk¹ P2
  if(collision(P2) && wait == 0)
  {
-    x = -x;
+    if(TimerP2Up->Enabled)          y -= angle;
+    else if(TimerP2Down->Enabled)   y += angle;
+    else if(y > 0)                  y = angle;
+    else if(y < 0)                  y = -angle;
+
     if(Ball->Top + Ball->Height/2 <= P2->Top + P2->Height/3)
     {
      P2Top->Visible = false;
@@ -82,106 +132,94 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
     {
      P2Center->Visible = false;
     }
-
     if((Ball->Top + Ball->Height/2) >= (P2->Top + P2->Height * 2 / 3) )
     {
      P2Bottom->Visible = false;
     }
    wait = 25;
+
+   if(y>(3*angle)) y -= angle;
+   if(y<(3*-angle)) y += angle;
+   changeX();
+ }
+ //przegrana P1
+ if(Ball->Left < P1->Left - 120)
+ {
+  TimerBall->Enabled = false;
+  serverP1 = true;
+  pointsP2++;
+  Ball->Left = P1->Left + P1->Width;
+  Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
+  }
+  //przegrana P2
+ if(Ball->Left > P2->Left + 120)
+ {
+  TimerBall->Enabled = false;
+  serverP2 = true;
+  pointsP1++;
+  Ball->Left = P2->Left - Ball->Width;
+  Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
  }
  // kolizja z ceglami
-
- if(collision(Brick1))
+ if(collision(Brick1) && Brick1->Visible)
  {
-  if(Brick1->Visible)
-  {
    x = -x;
    Brick1->Visible = false;
-  }
  }
 
- if(collision(Brick2))
+ if(collision(Brick2) && Brick2->Visible)
  {
-  if(Brick2->Visible)
-  {
    x = -x;
    Brick2->Visible = false;
-  }
  }
 
- if(collision(Brick3))
+ if(collision(Brick3) && Brick3->Visible)
  {
-  if(Brick3->Visible)
-  {
    x = -x;
    Brick3->Visible = false;
-  }
  }
 
- if(collision(Brick4))
+ if(collision(Brick4) && Brick4->Visible)
  {
-  if(Brick4->Visible)
-  {
    x = -x;
    Brick4->Visible = false;
-  }
  }
 
- if(collision(Brick5))
+ if(collision(Brick5) && Brick5->Visible)
  {
-  if(Brick5->Visible)
-  {
    x = -x;
    Brick5->Visible = false;
-  }
  }
 
- if(collision(Brick6))
+ if(collision(Brick6) && Brick6->Visible)
  {
-  if(Brick6->Visible)
-  {
    x = -x;
    Brick6->Visible = false;
-  }
  }
 
- if(collision(Brick7))
+ if(collision(Brick7) && Brick7->Visible)
  {
-  if(Brick7->Visible)
-  {
    x = -x;
    Brick7->Visible = false;
-  }
  }
 
- if(collision(Brick8))
+ if(collision(Brick8) && Brick8->Visible)
  {
-  if(Brick8->Visible)
-  {
    x = -x;
    Brick8->Visible = false;
-  }
  }
 
- if(collision(Brick9))
+ if(collision(Brick9) && Brick9->Visible)
  {
-  if(Brick9->Visible)
-  {
    x = -x;
    Brick9->Visible = false;
-  }
  }
 
- if(collision(Brick10))
+ if(collision(Brick10) && Brick10->Visible)
  {
-  if(Brick10->Visible)
-  {
    x = -x;
    Brick10->Visible = false;
-  }
  }
-
- 
 }
 
 //---------------------------------------------------------------------------
@@ -205,8 +243,36 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
     }
     if(Key == VK_DOWN)
     {
-     TimerP2Down->Enabled= true;
+     TimerP2Down->Enabled = true;
     }
+    if(Key == 'X')
+     {
+      if(serverP1 == true)
+      {
+       speed = basicSpeed;
+       if(TimerP1Up->Enabled)               y = -angle;
+       else if(TimerP1Down->Enabled)        y = angle;
+       else                                 y = 0;
+       changeX();
+       TimerBall->Enabled = true;
+       serverP1 = false;
+      }
+
+      
+     }
+
+    if(Key == VK_LEFT)
+     {
+      if(serverP2 == true)
+      {
+       if(TimerP2Up->Enabled)               y = -angle;
+       else if(TimerP2Down->Enabled)        y = angle;
+       else                                 y = 0;
+       changeX();
+       TimerBall->Enabled = true;
+       serverP2 = false;
+      }
+     }
 }
 //---------------------------------------------------------------------------
 
@@ -241,6 +307,11 @@ void __fastcall TForm1::TimerP1UpTimer(TObject *Sender)
   P1Center->Top = P1Top->Top + P1Top->Height;
   P1Bottom->Top = P1Center->Top + P1Center->Height;
  }
+ if(serverP1)
+ {
+  Ball->Left = P1->Left + P1->Width;
+  Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
+ }
 }
 //---------------------------------------------------------------------------
 
@@ -252,6 +323,11 @@ void __fastcall TForm1::TimerP1DownTimer(TObject *Sender)
   P1Top->Top = P1->Top;
   P1Center->Top = P1Top->Top + P1Top->Height;
   P1Bottom->Top = P1Center->Top + P1Center->Height;
+ }
+ if(serverP1)
+ {
+  Ball->Left = P1->Left + P1->Width;
+  Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
  }
 }
 //---------------------------------------------------------------------------
@@ -265,6 +341,11 @@ void __fastcall TForm1::TimerP2UpTimer(TObject *Sender)
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
  }
+ if(serverP2)
+ {
+  Ball->Left = P2->Left - Ball->Width;
+  Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
+ }
 }
 //---------------------------------------------------------------------------
 
@@ -277,6 +358,11 @@ void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
  }
+  if(serverP2)
+ {
+  Ball->Left = P2->Left - Ball->Width;
+  Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
+ }
 }
 //---------------------------------------------------------------------------
 
@@ -286,7 +372,7 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 {
  if(P1Top->Visible == false && P1Center->Visible == false && P1Bottom->Visible == false)
  {
-
+    if(blindingCount == 1)    showNewBrick(1);
     if (blindingCount%2 == 0) P1->Brush->Color = clYellow;
     else                      P1->Brush->Color = clRed;
     blindingCount ++;
@@ -301,7 +387,7 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 
  if(P2Top->Visible == false && P2Center->Visible == false && P2Bottom->Visible == false)
  {
-
+    if(blindingCount == 1)    showNewBrick(2);
     if (blindingCount%2 == 0) P2->Brush->Color = clYellow;
     else                      P2->Brush->Color = clRed;
     blindingCount ++;
@@ -313,7 +399,11 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
      P2Bottom->Visible = true;
     }
  }
+ if(pickup >= 1)
+ {
+ }
 }
 //---------------------------------------------------------------------------
+
 
 

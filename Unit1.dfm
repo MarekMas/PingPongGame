@@ -1,8 +1,8 @@
 object Form1: TForm1
-  Left = 139
-  Top = 44
-  Width = 1201
-  Height = 700
+  Left = 18
+  Top = 30
+  Width = 1191
+  Height = 680
   BorderIcons = [biSystemMenu, biMinimize]
   Caption = 'PingPongByMarekM'
   Color = clSkyBlue
@@ -43,6 +43,7 @@ object Form1: TForm1
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick2: TShape
     Left = 16
@@ -52,6 +53,7 @@ object Form1: TForm1
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick3: TShape
     Left = 16
@@ -61,6 +63,7 @@ object Form1: TForm1
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick4: TShape
     Left = 16
@@ -70,6 +73,7 @@ object Form1: TForm1
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick5: TShape
     Left = 16
@@ -79,6 +83,7 @@ object Form1: TForm1
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object P1Top: TShape
     Left = 121
@@ -139,48 +144,53 @@ object Form1: TForm1
   end
   object Brick6: TShape
     Left = 1144
-    Top = 48
+    Top = 40
     Width = 25
     Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick7: TShape
     Left = 1144
-    Top = 168
+    Top = 160
     Width = 25
     Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick8: TShape
     Left = 1144
-    Top = 288
+    Top = 280
     Width = 25
     Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick9: TShape
     Left = 1144
-    Top = 416
+    Top = 408
     Width = 25
     Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Brick10: TShape
     Left = 1144
-    Top = 544
+    Top = 536
     Width = 25
     Height = 100
     Brush.Color = clRed
     Pen.Width = 2
     Shape = stRoundRect
+    Visible = False
   end
   object Panel1: TPanel
     Left = 0
@@ -190,8 +200,27 @@ object Form1: TForm1
     Color = clBackground
     TabOrder = 0
   end
+  object ProgressBar1: TProgressBar
+    Left = 64
+    Top = 336
+    Width = 49
+    Height = 17
+    Min = 0
+    Max = 100
+    TabOrder = 1
+  end
+  object ProgressBar2: TProgressBar
+    Left = 1072
+    Top = 336
+    Width = 49
+    Height = 17
+    Min = 0
+    Max = 100
+    TabOrder = 2
+  end
   object TimerBall: TTimer
-    Interval = 30
+    Enabled = False
+    Interval = 20
     OnTimer = TimerBallTimer
     Left = 496
     Top = 48
