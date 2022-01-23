@@ -1,10 +1,11 @@
 object Form1: TForm1
-  Left = 71
-  Top = 46
-  Width = 1191
-  Height = 680
+  Left = 285
+  Top = 44
   BorderIcons = [biSystemMenu, biMinimize]
+  BorderStyle = bsToolWindow
   Caption = 'PingPongByMarekM'
+  ClientHeight = 642
+  ClientWidth = 1180
   Color = clSkyBlue
   UseDockManager = True
   DockSite = True
@@ -134,8 +135,8 @@ object Form1: TForm1
     Pen.Width = 2
   end
   object Ball: TShape
-    Left = 504
-    Top = 312
+    Left = 140
+    Top = 328
     Width = 25
     Height = 25
     Brush.Color = clYellow
@@ -192,6 +193,17 @@ object Form1: TForm1
     Shape = stRoundRect
     Visible = False
   end
+  object WinWindow: TShape
+    Left = 376
+    Top = 224
+    Width = 425
+    Height = 177
+    Brush.Color = clBlack
+    Pen.Color = clMaroon
+    Pen.Width = 3
+    Shape = stRoundRect
+    Visible = False
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -199,12 +211,111 @@ object Form1: TForm1
     Height = 33
     Color = clBackground
     TabOrder = 0
+    object Label1: TLabel
+      Left = 104
+      Top = 5
+      Width = 77
+      Height = 27
+      Alignment = taCenter
+      Caption = 'Player 1'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clYellow
+      Font.Height = -19
+      Font.Name = 'Comic Sans MS'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label2: TLabel
+      Left = 1016
+      Top = 5
+      Width = 77
+      Height = 27
+      Alignment = taCenter
+      Caption = 'Player 2'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clYellow
+      Font.Height = -19
+      Font.Name = 'Comic Sans MS'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 560
+      Top = 5
+      Width = 64
+      Height = 27
+      Alignment = taCenter
+      Caption = '0  :  0'
+      Font.Charset = EASTEUROPE_CHARSET
+      Font.Color = clYellow
+      Font.Height = -19
+      Font.Name = 'Comic Sans MS'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+  end
+  object StaticText1: TStaticText
+    Left = 376
+    Top = 248
+    Width = 425
+    Height = 48
+    Alignment = taCenter
+    AutoSize = False
+    BiDiMode = bdLeftToRight
+    Caption = 'StaticText1'
+    Color = clMaroon
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clYellow
+    Font.Height = -31
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentBiDiMode = False
+    ParentColor = False
+    ParentFont = False
+    ParentShowHint = False
+    ShowHint = False
+    TabOrder = 1
+    Visible = False
+  end
+  object Button1: TButton
+    Left = 416
+    Top = 312
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'New Game'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    Visible = False
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 632
+    Top = 312
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Quit'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 3
+    Visible = False
+    OnClick = Button2Click
   end
   object TimerBall: TTimer
     Enabled = False
     Interval = 20
     OnTimer = TimerBallTimer
-    Left = 496
+    Left = 576
     Top = 48
   end
   object TimerP2Up: TTimer
@@ -238,7 +349,7 @@ object Form1: TForm1
   object TimerBlinding: TTimer
     Interval = 100
     OnTimer = TimerBlindingTimer
-    Left = 496
+    Left = 576
     Top = 88
   end
 end

@@ -40,6 +40,13 @@ __published:	// IDE-managed Components
         TShape *Brick8;
         TShape *Brick9;
         TShape *Brick10;
+        TLabel *Label1;
+        TLabel *Label2;
+        TLabel *Label3;
+        TShape *WinWindow;
+        TStaticText *StaticText1;
+        TButton *Button1;
+        TButton *Button2;
 
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -51,6 +58,8 @@ __published:	// IDE-managed Components
         void __fastcall TimerP2UpTimer(TObject *Sender);
         void __fastcall TimerP2DownTimer(TObject *Sender);
         void __fastcall TimerBlindingTimer(TObject *Sender);
+        void __fastcall Button2Click(TObject *Sender);
+        void __fastcall Button1Click(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);
