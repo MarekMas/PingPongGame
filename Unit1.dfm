@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 285
-  Top = 44
+  Left = 155
+  Top = 63
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPongByMarekM'

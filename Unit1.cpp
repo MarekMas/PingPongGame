@@ -2,6 +2,7 @@
 
 #include <vcl.h>
 #include <math.h>
+#include "mmsystem.h"
 #pragma hdrstop
 #include "Unit1.h"
 //---------------------------------------------------------------------------
@@ -29,6 +30,7 @@ void showWinBox(AnsiString winner)
   Form1->StaticText1->Visible = true;
   Form1->Button1->Visible = true;
   Form1->Button2->Visible = true;
+  sndPlaySound("snd/win.wav",SND_ASYNC);
 
   startGame = false;
 }
@@ -52,6 +54,7 @@ bool collision(TShape *obj)
  {
 
  speed = basicSpeed;
+ sndPlaySound("snd/ballpickup.wav",SND_ASYNC);
 
   return true;
  }
@@ -105,7 +108,11 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
  // kolizja z paletk¹ P1
  if(collision(P1) && wait == 0)
  {
-    if(P1PressTurbo) speed = turboSpeed;
+    if(P1PressTurbo)
+    {
+     speed = turboSpeed;
+     sndPlaySound("snd/turbopickup.wav",SND_ASYNC);
+    }
     else
     {
      if(Ball->Top + Ball->Height/2 <= P1->Top + P1->Height/3)
@@ -137,7 +144,11 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   // kolizja z paletk¹ P2
  if(collision(P2) && wait == 0)
  {
-    if(P2PressTurbo) speed = turboSpeed;
+    if(P2PressTurbo)
+    {
+     speed = turboSpeed;
+     sndPlaySound("snd/turbopickup.wav",SND_ASYNC);
+    }
     else
     {
       if(Ball->Top + Ball->Height/2 <= P2->Top + P2->Height/3)
@@ -176,6 +187,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   Ball->Left = P1->Left + P1->Width;
   Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
   Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
+  sndPlaySound("snd/getpoints.wav",SND_ASYNC);
   }
   //przegrana P2
  if(Ball->Left > P2->Left + 120)
@@ -186,6 +198,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   Ball->Left = P2->Left - Ball->Width;
   Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
   Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
+  sndPlaySound("snd/getpoints.wav",SND_ASYNC);
  }
  //wygrana P1
  if(pointsP1 == 2)
@@ -441,7 +454,11 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 {
  if(P1Top->Visible == false && P1Center->Visible == false && P1Bottom->Visible == false)
  {
-    if(blindingCount == 1)    showNewBrick(1);
+    if(blindingCount == 1)
+    {
+     showNewBrick(1);
+     sndPlaySound("snd/newbrick.wav",SND_ASYNC);
+    }
     if (blindingCount%2 == 0) P1->Brush->Color = clYellow;
     else                      P1->Brush->Color = clRed;
     blindingCount ++;
@@ -456,7 +473,11 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 
  if(P2Top->Visible == false && P2Center->Visible == false && P2Bottom->Visible == false)
  {
-    if(blindingCount == 1)    showNewBrick(2);
+    if(blindingCount == 1)
+    {
+     showNewBrick(2);
+     sndPlaySound("snd/newbrick.wav",SND_ASYNC);
+    }
     if (blindingCount%2 == 0) P2->Brush->Color = clYellow;
     else                      P2->Brush->Color = clGreen;
     blindingCount ++;
