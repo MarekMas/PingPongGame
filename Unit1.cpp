@@ -22,6 +22,30 @@ bool serverP1 = true, serverP2 = false;
 bool P1PressTurbo = false, P2PressTurbo = false;
 bool swapBallColor = false;
 bool startGame = true;
+bool computerPlayer = false;
+int ballYOnP2Line = 0;
+//---------------------------------------------------------------------------
+int findBallPositionOnP2Line() //oblicz srodek wysokosci pilki gdy znajdzie sie na linii paletki P2
+{
+int yEndPosition = 0;
+int YStartPosition = Form1->Ball->Top +  Form1->Ball->Height/2;
+int numberOfXMovment = (Form1->P2->Left - Form1->Ball->Width - (Form1->P1->Left + Form1->P1->Width))/x;
+int distanseOfY = y * numberOfXMovment;
+yEndPosition = YStartPosition + distanseOfY;
+
+
+if(yEndPosition - Form1->Ball->Height/2 <= Form1->Panel1->Top + Form1->Panel1->Height)
+
+ {
+ yEndPosition = 2*(Form1->Panel1->Top + Form1->Panel1->Height + Form1->Ball->Height/2) - yEndPosition;
+
+ }
+if(yEndPosition + Form1->Ball->Height/2 >= Form1->Height - 50)
+ {
+  yEndPosition = 2*(Form1->Height - 50  - Form1->Ball->Height/2) - yEndPosition;
+ }
+ return yEndPosition;
+}
 //---------------------------------------------------------------------------
 void showWinBox(AnsiString winner)
 {
@@ -31,6 +55,7 @@ void showWinBox(AnsiString winner)
   Form1->Button1->Visible = true;
   Form1->Button2->Visible = true;
   sndPlaySound("snd/win.wav",SND_ASYNC);
+  Form1->Ball->Visible = false;
 
   startGame = false;
 }
@@ -130,16 +155,18 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
      }
     }
 
-    if(TimerP1Up->Enabled)             y -= angle;
-    else if(TimerP1Down->Enabled)      y += angle;
-    else if(y > 0)                     y = angle;
-    else if(y < 0)                     y = -angle;
+    if(TimerP1Up->Enabled)             y -= angle + angle/2;
+    else if(TimerP1Down->Enabled)      y += angle + angle/2;
+    else if(y > 0)                     y = angle + angle/2;
+    else if(y < 0)                     y = -angle + angle/2;
 
    wait = 25;
 
    if(y>(3*angle)) y -= angle;
    if(y<(3*-angle)) y += angle;
    changeX();
+   ballYOnP2Line = findBallPositionOnP2Line();
+   Shape1->Top = ballYOnP2Line - Shape1->Height/2;
  }
   // kolizja z paletk¹ P2
  if(collision(P2) && wait == 0)
@@ -166,10 +193,10 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
        }
     }
 
-    if(TimerP2Up->Enabled)          y -= angle;
-    else if(TimerP2Down->Enabled)   y += angle;
-    else if(y > 0)                  y = angle;
-    else if(y < 0)                  y = -angle;
+    if(TimerP2Up->Enabled)          y -= angle + angle/2;
+    else if(TimerP2Down->Enabled)   y += angle + angle/2;
+    else if(y > 0)                  y = angle + angle/2;
+    else if(y < 0)                  y = -angle + angle/2;
 
 
    wait = 25;
@@ -288,11 +315,11 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
     {
      TimerP1Down->Enabled = true;
     }
-    if(Key == VK_UP)
+    if(Key == VK_UP && computerPlayer == false)
     {
      TimerP2Up->Enabled=true;
     }
-    if(Key == VK_DOWN)
+    if(Key == VK_DOWN && !computerPlayer)
     {
      TimerP2Down->Enabled = true;
     }
@@ -307,6 +334,7 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
        changeX();
        TimerBall->Enabled = true;
        serverP1 = false;
+       ballYOnP2Line = findBallPositionOnP2Line();
       }
       else
       {
@@ -314,10 +342,10 @@ void __fastcall TForm1::FormKeyDown(TObject *Sender, WORD &Key,
        P1->BringToFront();
        P1PressTurbo = true;
       }
-      
+
      }
 
-    if(Key == VK_LEFT)
+    if(Key == VK_LEFT && !computerPlayer)
      {
       if(serverP2 == true)
       {
@@ -350,11 +378,11 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
     {
      TimerP1Down->Enabled = false;
     }
-    if(Key == VK_UP)
+    if(Key == VK_UP && !computerPlayer)
     {
      TimerP2Up->Enabled = false;
     }
-    if(Key == VK_DOWN)
+    if(Key == VK_DOWN&& !computerPlayer)
     {
      TimerP2Down->Enabled = false;
     }
@@ -364,7 +392,7 @@ void __fastcall TForm1::FormKeyUp(TObject *Sender, WORD &Key,
      P1->SendToBack();
      P1PressTurbo = false;
     }
-    if(Key == VK_LEFT)
+    if(Key == VK_LEFT && !computerPlayer)
     {
      P2->Brush->Color = clYellow;
      P2->SendToBack();
@@ -515,7 +543,6 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 
 void __fastcall TForm1::Button2Click(TObject *Sender)
 {
- //Form1->Close();
  Application->Terminate();
 }
 //---------------------------------------------------------------------------
@@ -549,9 +576,6 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
   pointsP1 = 0;
   pointsP2 = 0;
-  //serverP1 = true;
-  //serverP2 = false;
-  //if(x<0) x = -x;
   P1->Top = 280;
   P1Top->Top = P1->Top;
   P1Center->Top = P1Top->Top + P1Top->Height;
@@ -570,6 +594,7 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
   Ball->Left = P2->Left - Ball->Width;
   Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
  }
+   Form1->Ball->Visible = true;
 
   Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
 
@@ -578,4 +603,40 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+
+void __fastcall TForm1::TimerAITimer(TObject *Sender)
+{
+
+      if(serverP2 == true)
+      {
+       Sleep(1000);
+       changeX();
+       TimerBall->Enabled = true;
+       serverP2 = false;
+       ballYOnP2Line = (Form1->Height -50 + Panel1->Height)/2;
+      }
+
+      if(ballYOnP2Line > P2->Top + P2->Height *2/3)
+      {
+         TimerP2Up->Enabled = false;
+         TimerP2Down->Enabled = true;
+      }
+      else if(ballYOnP2Line < P2->Top + P2->Height/3)
+      {
+         TimerP2Up->Enabled = true;
+         TimerP2Down->Enabled = false;
+      }
+
+      else
+      {
+         TimerP2Up->Enabled = false;
+         TimerP2Down->Enabled = false;
+      }
+
+
+
+
+
+}
+//---------------------------------------------------------------------------
 

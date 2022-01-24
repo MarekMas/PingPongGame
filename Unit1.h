@@ -47,6 +47,8 @@ __published:	// IDE-managed Components
         TStaticText *StaticText1;
         TButton *Button1;
         TButton *Button2;
+        TShape *Shape1;
+        TTimer *TimerAI;
 
         void __fastcall TimerBallTimer(TObject *Sender);
         void __fastcall FormKeyDown(TObject *Sender, WORD &Key,
@@ -60,6 +62,7 @@ __published:	// IDE-managed Components
         void __fastcall TimerBlindingTimer(TObject *Sender);
         void __fastcall Button2Click(TObject *Sender);
         void __fastcall Button1Click(TObject *Sender);
+        void __fastcall TimerAITimer(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TForm1(TComponent* Owner);

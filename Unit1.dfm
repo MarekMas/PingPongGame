@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 155
-  Top = 63
+  Left = 114
+  Top = 33
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPongByMarekM'
@@ -204,6 +204,12 @@ object Form1: TForm1
     Shape = stRoundRect
     Visible = False
   end
+  object Shape1: TShape
+    Left = 1044
+    Top = 240
+    Width = 25
+    Height = 25
+  end
   object Panel1: TPanel
     Left = 0
     Top = 0
@@ -351,5 +357,11 @@ object Form1: TForm1
     OnTimer = TimerBlindingTimer
     Left = 576
     Top = 88
+  end
+  object TimerAI: TTimer
+    Interval = 10
+    OnTimer = TimerAITimer
+    Left = 976
+    Top = 80
   end
 end
