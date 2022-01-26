@@ -1,6 +1,6 @@
 object Form1: TForm1
-  Left = 240
-  Top = 64
+  Left = 172
+  Top = 117
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPongByMarekM'
@@ -16,6 +16,8 @@ object Form1: TForm1
   Font.Style = []
   OldCreateOrder = False
   Position = poScreenCenter
+  Visible = True
+  OnCreate = FormCreate
   OnKeyDown = FormKeyDown
   OnKeyUp = FormKeyUp
   PixelsPerInch = 96
@@ -197,12 +199,11 @@ object Form1: TForm1
     Left = 376
     Top = 224
     Width = 425
-    Height = 177
+    Height = 297
     Brush.Color = clBlack
     Pen.Color = clMaroon
     Pen.Width = 3
     Shape = stRoundRect
-    Visible = False
   end
   object Panel1: TPanel
     Left = 0
@@ -256,13 +257,13 @@ object Form1: TForm1
   end
   object StaticText1: TStaticText
     Left = 376
-    Top = 248
+    Top = 256
     Width = 425
     Height = 48
     Alignment = taCenter
     AutoSize = False
     BiDiMode = bdLeftToRight
-    Caption = 'StaticText1'
+    Caption = 'Menu'
     Color = clMaroon
     Font.Charset = EASTEUROPE_CHARSET
     Font.Color = clYellow
@@ -275,28 +276,10 @@ object Form1: TForm1
     ParentShowHint = False
     ShowHint = False
     TabOrder = 1
-    Visible = False
   end
-  object Button1: TButton
-    Left = 416
-    Top = 312
-    Width = 129
-    Height = 65
-    Cursor = crHandPoint
-    Caption = 'New Game'
-    Font.Charset = EASTEUROPE_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Comic Sans MS'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-    Visible = False
-    OnClick = Button1Click
-  end
-  object Button2: TButton
-    Left = 632
-    Top = 312
+  object Button3: TButton
+    Left = 512
+    Top = 432
     Width = 129
     Height = 65
     Cursor = crHandPoint
@@ -307,9 +290,91 @@ object Form1: TForm1
     Font.Name = 'Comic Sans MS'
     Font.Style = [fsBold]
     ParentFont = False
+    TabOrder = 2
+    OnClick = Button3Click
+  end
+  object Button1: TButton
+    Left = 424
+    Top = 336
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Single Player'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 3
-    Visible = False
+    OnClick = Button1Click
+  end
+  object Button2: TButton
+    Left = 600
+    Top = 336
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Two Players'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 4
     OnClick = Button2Click
+  end
+  object Button4: TButton
+    Left = 424
+    Top = 336
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Easy'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 5
+    Visible = False
+    OnClick = Button4Click
+  end
+  object Button5: TButton
+    Left = 600
+    Top = 336
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Normal'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 6
+    Visible = False
+    OnClick = Button5Click
+  end
+  object Button6: TButton
+    Left = 512
+    Top = 432
+    Width = 129
+    Height = 65
+    Cursor = crHandPoint
+    Caption = 'Hard'
+    Font.Charset = EASTEUROPE_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Comic Sans MS'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 7
+    Visible = False
+    OnClick = Button6Click
   end
   object TimerBall: TTimer
     Enabled = False
@@ -352,10 +417,10 @@ object Form1: TForm1
     Left = 576
     Top = 88
   end
-  object TimerAI: TTimer
+  object AITimer: TTimer
     Interval = 20
-    OnTimer = TimerAITimer
-    Left = 976
-    Top = 80
+    OnTimer = AITimerTimer
+    Left = 992
+    Top = 56
   end
 end

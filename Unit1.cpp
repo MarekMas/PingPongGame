@@ -11,20 +11,72 @@
 TForm1 *Form1;
 int x = 0;
 int y = 0;
-int const basicSpeed = 20;
-int const turboSpeed = 30;
-int const angle = 4;
+int basicSpeed = 20;
+int turboSpeed = 30;
+int angle = 4;
 int speed = basicSpeed;
+int speedP1 = 10, speedP2 = 10;
 int wait = 0;
 int blindingCount = 1;
 int pointsP1 = 0, pointsP2 = 0;
 bool serverP1 = true, serverP2 = false;
 bool P1PressTurbo = false, P2PressTurbo = false;
 bool swapBallColor = false;
-bool startGame = true;
-bool computerPlayer = true;
+bool startGame = false;
+bool computerPlayer = false;
 int ballYOnP2Line = 340;
 int randomValue = 0;
+//---------------------------------------------------------------------------
+void restartGame()
+{
+  startGame = true;
+  speed = basicSpeed;
+  ballYOnP2Line = 340;
+  wait = 0;
+
+  Form1->Brick1->Visible = false;
+  Form1->Brick2->Visible = false;
+  Form1->Brick3->Visible = false;
+  Form1->Brick4->Visible = false;
+  Form1->Brick5->Visible = false;
+  Form1->Brick6->Visible = false;
+  Form1->Brick7->Visible = false;
+  Form1->Brick8->Visible = false;
+  Form1->Brick9->Visible = false;
+  Form1->Brick10->Visible = false;
+  Form1->P2Top->Visible = true;
+  Form1->P2Center->Visible = true;
+  Form1->P2Bottom->Visible = true;
+  Form1->P1Top->Visible = true;
+  Form1->P1Center->Visible = true;
+  Form1->P1Bottom->Visible = true;
+
+  pointsP1 = 0;
+  pointsP2 = 0;
+  Form1->P1->Top = 280;
+  Form1->P1Top->Top = Form1->P1->Top;
+  Form1->P1Center->Top = Form1->P1Top->Top + Form1->P1Top->Height;
+  Form1->P1Bottom->Top = Form1->P1Center->Top + Form1->P1Center->Height;
+
+  Form1->P2->Top = 280;
+  Form1->P2Top->Top = Form1->P2->Top;
+  Form1->P2Center->Top = Form1->P2Top->Top + Form1->P2Top->Height;
+  Form1->P2Bottom->Top = Form1->P2Center->Top + Form1->P2Center->Height;
+
+  if(serverP1)
+  {
+   Form1->Ball->Left = Form1->P1->Left + Form1->P1->Width;
+   Form1->Ball->Top = Form1->P1->Top + Form1->P1->Height/2 - Form1->Ball->Height/2;
+  }
+  if(serverP2)
+  {
+   Form1->Ball->Left = Form1->P2->Left - Form1->Ball->Width;
+   Form1->Ball->Top = Form1->P2->Top + Form1->P2->Height/2 - Form1->Ball->Height/2;
+  }
+
+  Form1->Ball->Visible = true;
+  Form1->Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
+}
 //---------------------------------------------------------------------------
 int getRandomIntiger(int scope)
 {
@@ -34,26 +86,28 @@ int getRandomIntiger(int scope)
 //---------------------------------------------------------------------------
 int findBallPositionOnP2Line() //oblicz srodek wysokosci pilki gdy znajdzie sie na linii paletki P2
 {
-int yEndPosition = 0;
-int YStartPosition = Form1->Ball->Top +  Form1->Ball->Height/2;
-int numberOfXMovment = (Form1->P2->Left - Form1->Ball->Width - (Form1->P1->Left + Form1->P1->Width))/x;
-int distanseOfY = y * numberOfXMovment;
-yEndPosition = YStartPosition + distanseOfY;
+ int yEndPosition = 0;
+ int YStartPosition = Form1->Ball->Top +  Form1->Ball->Height/2;
+ if(x == 0) return 380;
+ int numberOfXMovment = (Form1->P2->Left - Form1->Ball->Width - (Form1->P1->Left + Form1->P1->Width))/x;
+ int distanseOfY = y * numberOfXMovment;
+ yEndPosition = YStartPosition + distanseOfY;
 
 
-if(yEndPosition - Form1->Ball->Height/2 <= Form1->Panel1->Top + Form1->Panel1->Height)
+ if(yEndPosition - Form1->Ball->Height/2 <= Form1->Panel1->Top + Form1->Panel1->Height)
 
  {
- yEndPosition = 2*(Form1->Panel1->Top + Form1->Panel1->Height + Form1->Ball->Height/2) - yEndPosition;
+  yEndPosition = 2*(Form1->Panel1->Top + Form1->Panel1->Height + Form1->Ball->Height/2) - yEndPosition;
 
  }
-if(yEndPosition + Form1->Ball->Height/2 >= Form1->Height - 50)
+ if(yEndPosition + Form1->Ball->Height/2 >= Form1->Height - 50)
  {
   yEndPosition = 2*(Form1->Height - 50  - Form1->Ball->Height/2) - yEndPosition;
  }
  return yEndPosition;
 }
 //---------------------------------------------------------------------------
+
 void showWinBox(AnsiString winner)
 {
   Form1->StaticText1->Caption = winner + "  WON";
@@ -61,12 +115,39 @@ void showWinBox(AnsiString winner)
   Form1->StaticText1->Visible = true;
   Form1->Button1->Visible = true;
   Form1->Button2->Visible = true;
+  Form1->Button3->Visible = true;
   sndPlaySound("snd/win.wav",SND_ASYNC);
   Form1->Ball->Visible = false;
 
   startGame = false;
 }
 //---------------------------------------------------------------------------
+
+void showLevelBox()
+{
+  Form1->StaticText1->Caption = "Computer Level";
+  Form1->WinWindow->Visible = true;
+  Form1->StaticText1->Visible = true;
+  Form1->Button4->Visible = true;
+  Form1->Button5->Visible = true;
+  Form1->Button6->Visible = true;
+  Form1->Ball->Visible = false;
+
+  startGame = false;
+}
+//---------------------------------------------------------------------------
+void hideBox()
+{
+  Form1->WinWindow->Visible = false;
+  Form1->StaticText1->Visible = false;
+  Form1->Button1->Visible = false;
+  Form1->Button2->Visible = false;
+  Form1->Button3->Visible = false;
+  Form1->Button4->Visible = false;
+  Form1->Button5->Visible = false;
+  Form1->Button6->Visible = false;
+
+}
 void changeX()
 {
  double outcome, speedD = speed , yD = y;
@@ -236,14 +317,15 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   sndPlaySound("snd/getpoints.wav",SND_ASYNC);
  }
  //wygrana P1
- if(pointsP1 == 9)
+ if(pointsP1 == 2)
  {
     showWinBox("Player 1");
  }
  //wygrana P2
- if(pointsP2 == 9)
+ if(pointsP2 == 2)
  {
-    showWinBox("Player 2");
+    if(computerPlayer)   showWinBox("Computer");
+    else                 showWinBox("Player 2");
  }
  // kolizja z ceglami
  if(collision(Brick1) && Brick1->Visible)
@@ -435,7 +517,7 @@ void __fastcall TForm1::TimerP1DownTimer(TObject *Sender)
 
  if(P1->Top + P1->Height <= Form1->Height -50)
  {
-  P1->Top += 10;
+  P1->Top += speedP1;
   P1Top->Top = P1->Top;
   P1Center->Top = P1Top->Top + P1Top->Height;
   P1Bottom->Top = P1Center->Top + P1Center->Height;
@@ -453,7 +535,7 @@ void __fastcall TForm1::TimerP2UpTimer(TObject *Sender)
 
  if(P2->Top >= Panel1->Top + Panel1->Height)
  {
-  P2->Top -= 5;
+  P2->Top -= speedP2;
   P2Top->Top = P2->Top;
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
@@ -471,7 +553,7 @@ void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
 
  if(P2->Top + P2->Height <= Form1->Height -50)
  {
-  P2->Top += 5;
+  P2->Top += speedP2;
   P2Top->Top = P2->Top;
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
@@ -483,8 +565,6 @@ void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
  }
 }
 //---------------------------------------------------------------------------
-
-
 
 void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 {
@@ -546,75 +626,72 @@ void __fastcall TForm1::TimerBlindingTimer(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
-
-
+void __fastcall TForm1::Button1Click(TObject *Sender)
+{
+ hideBox();
+ computerPlayer = true;
+ Label2->Caption = "Computer";
+ showLevelBox();
+}
+//---------------------------------------------------------------------------
 
 void __fastcall TForm1::Button2Click(TObject *Sender)
+{
+ hideBox();
+ computerPlayer = false;
+ Label2->Caption = "Player 2";
+ speedP2 = 10;
+ basicSpeed =20;
+ turboSpeed =30;
+ angle = 4;
+ TimerP2Up->Enabled = false;
+ TimerP2Down->Enabled = false;
+ restartGame();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button3Click(TObject *Sender)
 {
  Application->Terminate();
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TForm1::Button1Click(TObject *Sender)
+void __fastcall TForm1::Button4Click(TObject *Sender)
 {
-  startGame = true;
-  speed = basicSpeed;
-
-  WinWindow->Visible = false;
-  StaticText1->Visible = false;
-  Button1->Visible = false;
-  Button2->Visible = false;
-
-  Brick1->Visible = false;
-  Brick2->Visible = false;
-  Brick3->Visible = false;
-  Brick4->Visible = false;
-  Brick5->Visible = false;
-  Brick6->Visible = false;
-  Brick7->Visible = false;
-  Brick8->Visible = false;
-  Brick9->Visible = false;
-  Brick10->Visible = false;
-  P2Top->Visible = true;
-  P2Center->Visible = true;
-  P2Bottom->Visible = true;
-  P1Top->Visible = true;
-  P1Center->Visible = true;
-  P1Bottom->Visible = true;
-
-  pointsP1 = 0;
-  pointsP2 = 0;
-  P1->Top = 280;
-  P1Top->Top = P1->Top;
-  P1Center->Top = P1Top->Top + P1Top->Height;
-  P1Bottom->Top = P1Center->Top + P1Center->Height;
-  if(serverP1)
-  {
-   Ball->Left = P1->Left + P1->Width;
-   Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
-  }
-  P2->Top = 280;
-  P2Top->Top = P2->Top;
-  P2Center->Top = P2Top->Top + P2Top->Height;
-  P2Bottom->Top = P2Center->Top + P2Center->Height;
-  if(serverP2)
- {
-  Ball->Left = P2->Left - Ball->Width;
-  Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
- }
-   Form1->Ball->Visible = true;
-
-  Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
-
-  wait = 0;
-
+ speedP2 = 5;
+ basicSpeed =15;
+ turboSpeed =20;
+ angle = 3;
+ hideBox();
+ restartGame();
 }
 //---------------------------------------------------------------------------
 
-
-void __fastcall TForm1::TimerAITimer(TObject *Sender)
+void __fastcall TForm1::Button5Click(TObject *Sender)
 {
-     if(startGame)
+ speedP2 = 8;
+ basicSpeed =20;
+ turboSpeed =30;
+  angle = 4;
+ hideBox();
+ restartGame();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::Button6Click(TObject *Sender)
+{
+ speedP2 = 12;
+ basicSpeed =25;
+ turboSpeed =38;
+ angle = 5;
+ hideBox();
+ restartGame();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TForm1::AITimerTimer(TObject *Sender)
+{
+     if(startGame && computerPlayer)
      {
       if(serverP2 == true)
       {
@@ -626,7 +703,7 @@ void __fastcall TForm1::TimerAITimer(TObject *Sender)
        case 1:
              y = -angle;
        break;
-       case 2:   
+       case 2:
             y =  angle;
        break;
        case 3:
@@ -649,18 +726,18 @@ void __fastcall TForm1::TimerAITimer(TObject *Sender)
          TimerP2Up->Enabled = true;
          TimerP2Down->Enabled = false;
       }
-
       else
       {
          TimerP2Up->Enabled = false;
          TimerP2Down->Enabled = false;
       }
      }
+}
+//---------------------------------------------------------------------------
 
-
-
-
-
+void __fastcall TForm1::FormCreate(TObject *Sender)
+{
+ ShowMessage("Sterowanie paletk¹: Gracz1  A,S; Gracz 2 Strza³ki góra,dó³. Serwowanie/Mocne uderzenie: Gracz 1 klawisz X; Gracz 2 strza³ka w lewo. Aby zmieni k¹t odbicia pi³ki trzeba miec wcisniety kawisz ruchu w trakcie odbicia. Powodzenia :)");
 }
 //---------------------------------------------------------------------------
 
