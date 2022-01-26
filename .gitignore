@@ -1,7 +1,6 @@
 # Prerequisites
 *.d
 *.~*
-*.exe
 *.tds
 
 # Compiled Object files
