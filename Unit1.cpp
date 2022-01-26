@@ -317,12 +317,12 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   sndPlaySound("snd/getpoints.wav",SND_ASYNC);
  }
  //wygrana P1
- if(pointsP1 == 2)
+ if(pointsP1 == 7)
  {
     showWinBox("Player 1");
  }
  //wygrana P2
- if(pointsP2 == 2)
+ if(pointsP2 == 7)
  {
     if(computerPlayer)   showWinBox("Computer");
     else                 showWinBox("Player 2");
