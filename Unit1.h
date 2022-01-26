@@ -47,7 +47,6 @@ __published:	// IDE-managed Components
         TStaticText *StaticText1;
         TButton *Button1;
         TButton *Button2;
-        TShape *Shape1;
         TTimer *TimerAI;
 
         void __fastcall TimerBallTimer(TObject *Sender);

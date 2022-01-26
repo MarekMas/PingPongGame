@@ -22,8 +22,15 @@ bool serverP1 = true, serverP2 = false;
 bool P1PressTurbo = false, P2PressTurbo = false;
 bool swapBallColor = false;
 bool startGame = true;
-bool computerPlayer = false;
-int ballYOnP2Line = 0;
+bool computerPlayer = true;
+int ballYOnP2Line = 340;
+int randomValue = 0;
+//---------------------------------------------------------------------------
+int getRandomIntiger(int scope)
+{
+ randomize();
+ return  random(scope)+1;
+}
 //---------------------------------------------------------------------------
 int findBallPositionOnP2Line() //oblicz srodek wysokosci pilki gdy znajdzie sie na linii paletki P2
 {
@@ -125,11 +132,9 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   Ball->Top += y;
  }
  //kolizje ze scianami
- if((Ball->Top <= Panel1->Top + Panel1->Height)||
-    (Ball->Top + Ball->Height >= Form1->Height - 50))
- {
-  y = -y;
- }
+ if(Ball->Top <= Panel1->Top + Panel1->Height && y<0)        y = -y;
+ if(Ball->Top + Ball->Height >= Form1->Height - 50 && y>0)   y = -y;
+
  // kolizja z paletk¹ P1
  if(collision(P1) && wait == 0)
  {
@@ -166,12 +171,13 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
    if(y<(3*-angle)) y += angle;
    changeX();
    ballYOnP2Line = findBallPositionOnP2Line();
-   Shape1->Top = ballYOnP2Line - Shape1->Height/2;
  }
   // kolizja z paletk¹ P2
  if(collision(P2) && wait == 0)
  {
-    if(P2PressTurbo)
+    randomValue = getRandomIntiger(3);
+
+    if(P2PressTurbo || (computerPlayer == true && randomValue == 2))
     {
      speed = turboSpeed;
      sndPlaySound("snd/turbopickup.wav",SND_ASYNC);
@@ -192,11 +198,11 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
         P2Bottom->Visible = false;
        }
     }
-
-    if(TimerP2Up->Enabled)          y -= angle + angle/2;
-    else if(TimerP2Down->Enabled)   y += angle + angle/2;
-    else if(y > 0)                  y = angle + angle/2;
-    else if(y < 0)                  y = -angle + angle/2;
+    randomValue = getRandomIntiger(4);
+    if(TimerP2Up->Enabled || randomValue == 1)          y -= angle + angle/2;
+    else if(TimerP2Down->Enabled || randomValue == 2)   y += angle + angle/2;
+    else if(y > 0 || randomValue == 3)                  y = angle + angle/2;
+    else if(y < 0 || randomValue == 4)                  y = -angle + angle/2;
 
 
    wait = 25;
@@ -213,6 +219,7 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   pointsP2++;
   Ball->Left = P1->Left + P1->Width;
   Ball->Top = P1->Top + P1->Height/2 - Ball->Height/2;
+  Ball->Brush->Color = clYellow;
   Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
   sndPlaySound("snd/getpoints.wav",SND_ASYNC);
   }
@@ -224,16 +231,17 @@ void __fastcall TForm1::TimerBallTimer(TObject *Sender)
   pointsP1++;
   Ball->Left = P2->Left - Ball->Width;
   Ball->Top = P2->Top + P2->Height/2 - Ball->Height/2;
+  Ball->Brush->Color = clYellow;
   Label3->Caption = IntToStr(pointsP1) + "  :  " + IntToStr(pointsP2);
   sndPlaySound("snd/getpoints.wav",SND_ASYNC);
  }
  //wygrana P1
- if(pointsP1 == 2)
+ if(pointsP1 == 9)
  {
     showWinBox("Player 1");
  }
  //wygrana P2
- if(pointsP2 == 2)
+ if(pointsP2 == 9)
  {
     showWinBox("Player 2");
  }
@@ -445,7 +453,7 @@ void __fastcall TForm1::TimerP2UpTimer(TObject *Sender)
 
  if(P2->Top >= Panel1->Top + Panel1->Height)
  {
-  P2->Top -= 10;
+  P2->Top -= 5;
   P2Top->Top = P2->Top;
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
@@ -463,7 +471,7 @@ void __fastcall TForm1::TimerP2DownTimer(TObject *Sender)
 
  if(P2->Top + P2->Height <= Form1->Height -50)
  {
-  P2->Top += 10;
+  P2->Top += 5;
   P2Top->Top = P2->Top;
   P2Center->Top = P2Top->Top + P2Top->Height;
   P2Bottom->Top = P2Center->Top + P2Center->Height;
@@ -606,10 +614,25 @@ void __fastcall TForm1::Button1Click(TObject *Sender)
 
 void __fastcall TForm1::TimerAITimer(TObject *Sender)
 {
-
+     if(startGame)
+     {
       if(serverP2 == true)
       {
-       Sleep(1000);
+       speed = basicSpeed;
+       Application->ProcessMessages();       Sleep(1000);
+       randomValue = getRandomIntiger(3);
+       switch(randomValue)
+       {
+       case 1:
+             y = -angle;
+       break;
+       case 2:   
+            y =  angle;
+       break;
+       case 3:
+            y = 0;
+       break;
+       }
        changeX();
        TimerBall->Enabled = true;
        serverP2 = false;
@@ -632,6 +655,7 @@ void __fastcall TForm1::TimerAITimer(TObject *Sender)
          TimerP2Up->Enabled = false;
          TimerP2Down->Enabled = false;
       }
+     }
 
 
 
