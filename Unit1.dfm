@@ -1,11 +1,11 @@
 object Form1: TForm1
-  Left = 825
-  Top = -808
+  Left = 83
+  Top = 44
   BorderIcons = [biSystemMenu, biMinimize]
   BorderStyle = bsToolWindow
   Caption = 'PingPongByMarekM'
   ClientHeight = 642
-  ClientWidth = 1180
+  ClientWidth = 1183
   Color = clSkyBlue
   UseDockManager = True
   DockSite = True
@@ -196,7 +196,7 @@ object Form1: TForm1
     Visible = False
   end
   object WinWindow: TShape
-    Left = 376
+    Left = 384
     Top = 224
     Width = 425
     Height = 297
@@ -256,7 +256,7 @@ object Form1: TForm1
     end
   end
   object StaticText1: TStaticText
-    Left = 376
+    Left = 384
     Top = 256
     Width = 425
     Height = 48
@@ -278,7 +278,7 @@ object Form1: TForm1
     TabOrder = 1
   end
   object Button3: TButton
-    Left = 512
+    Left = 520
     Top = 432
     Width = 129
     Height = 65
@@ -294,7 +294,7 @@ object Form1: TForm1
     OnClick = Button3Click
   end
   object Button1: TButton
-    Left = 424
+    Left = 432
     Top = 336
     Width = 129
     Height = 65
@@ -310,7 +310,7 @@ object Form1: TForm1
     OnClick = Button1Click
   end
   object Button2: TButton
-    Left = 600
+    Left = 608
     Top = 336
     Width = 129
     Height = 65
@@ -326,7 +326,7 @@ object Form1: TForm1
     OnClick = Button2Click
   end
   object Button4: TButton
-    Left = 424
+    Left = 432
     Top = 336
     Width = 129
     Height = 65
@@ -343,7 +343,7 @@ object Form1: TForm1
     OnClick = Button4Click
   end
   object Button5: TButton
-    Left = 600
+    Left = 608
     Top = 336
     Width = 129
     Height = 65
@@ -360,7 +360,7 @@ object Form1: TForm1
     OnClick = Button5Click
   end
   object Button6: TButton
-    Left = 512
+    Left = 520
     Top = 432
     Width = 129
     Height = 65
