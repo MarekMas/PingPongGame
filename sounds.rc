@@ -1,0 +1,5 @@
+BALL_PICKUP WAVE "snd/ballpickup.wav"
+GET_POINT WAVE "snd/getpoints.wav"
+NEW_BRICK WAVE "snd/newbrick.wav"
+TURBO_PICKUP WAVE "snd/turbopickup.wav"
+WIN WAVE "snd/win.wav"
